@@ -1,87 +1,36 @@
 /*
-The MIT License (MIT)
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+ */
 
-Copyright (c) 2014 Chris Wilson
+'use strict';
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+// Put variables in global scope to make them available to the browser console.
+const audio = document.querySelector('audio');
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+const constraints = window.constraints = {
+  audio: true,
+  video: false
+};
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-var audioContext = null;
-var meter = null;
-var canvasContext = null;
-var WIDTH=500;
-var HEIGHT=50;
-var rafID = null;
-var mediaStreamSource = null;
-
-window.onload = function() {
-
-    // grab our canvas
-	canvasContext = document.getElementById( "meter" ).getContext("2d");
+function handleSuccess(stream) {
+  const audioTracks = stream.getAudioTracks();
+  console.log('Got stream with constraints:', constraints);
+  console.log('Using audio device: ' + audioTracks[0].label);
+  stream.oninactive = function() {
+    console.log('Stream ended');
+  };
+  window.stream = stream; // make variable available to browser console
+  audio.srcObject = stream;
 }
 
-function startMeter() {	
-    // grab an audio context
-    audioContext = new AudioContext();
-
-    // Attempt to get audio input
-    navigator.mediaDevices.getUserMedia(
-    {
-        "audio": {
-            "mandatory": {
-                "googEchoCancellation": "false",
-                "googAutoGainControl": "false",
-                "googNoiseSuppression": "false",
-                "googHighpassFilter": "false"
-            },
-            "optional": []
-        },
-    }).then((stream) => {
-        // Create an AudioNode from the stream.
-        mediaStreamSource = audioContext.createMediaStreamSource(stream);
-
-        // Create a new volume meter and connect it.
-        meter = createAudioMeter(audioContext);
-        mediaStreamSource.connect(meter);
-
-        // kick off the visual updating
-        drawLoop();
-    }).catch((err) => {
-        // always check for errors at the end.
-        console.error(`${err.name}: ${err.message}`);
-        alert('Stream generation failed.');
-    });
+function handleError(error) {
+  const errorMessage = 'navigator.MediaDevices.getUserMedia error: ' + error.message + ' ' + error.name;
+  document.getElementById('errorMsg').innerText = errorMessage;
+  console.log(errorMessage);
 }
 
-
-function drawLoop( time ) {
-    // clear the background
-    canvasContext.clearRect(0,0,WIDTH,HEIGHT);
-
-    // check if we're currently clipping
-    if (meter.checkClipping())
-        canvasContext.fillStyle = "red";
-    else
-        canvasContext.fillStyle = "green";
-
-    // draw a bar based on the current volume
-    canvasContext.fillRect(0, 0, meter.volume*WIDTH*1.4, HEIGHT);
-
-    // set up the next visual callback
-    rafID = window.requestAnimationFrame( drawLoop );
-}
+navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);

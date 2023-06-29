@@ -1,35 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+-->
 <html>
-	<head>
-		<title>Volume Meter Sample</title>
-		<style>
-		</style>
-		<!-- Include the volume meter component -->
-		<script src="../static/js/volume-meter.js"></script>
-		<!-- Include the main app logic -->
-		<script src="../static/js/main.js"></script>
-	</head>
-	<body>
-		<p>This sample shows how to implement a clip-indicating volume meter in Web Audio, using a ScriptProcessor.  It's necessary to use a ScriptProcessor in order to not miss any clipping samples - otherwise you could implement this using a RealtimeAnalyser to only grab samples when necessary.</p>
-		<p><button onclick="startMeter();">Start</button></p>
-		<canvas id="meter" width="500" height="50"></canvas>
+<head>
 
-		<p>Check out the <a href="http://github.com/cwilso/volume-meter/">source on Github</a>.</p>
-		<p>The usage is quite easy:
-		<pre>var meter = createAudioMeter(audioContext,clipLevel,averaging,clipLag);
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
+    <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
 
-audioContext: the AudioContext you're using.
-clipLevel: the level (0 to 1) that you would consider "clipping".  Defaults to 0.98.
-averaging: how "smoothed" you would like the meter to be over time.  Should be between 0 and less than 1.  Defaults to 0.95.
-clipLag: how long you would like the "clipping" indicator to show after clipping has occured, in milliseconds.  Defaults to 750ms.
+    <base target="_blank">
 
-meter.checkClipping();
+    <title>gUM audio</title>
 
-returns true if the node has clipped in the last clipLag milliseconds.
+    <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../../css/main.css">
 
-meter.shutdown();
+</head>
 
-used to destroy the node (it's important to disconnect and remove the event handler for any ScriptProcessor).
-</pre>
-	</body>
+<body>
+
+<div id="container">
+
+    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getUserMedia, audio only</span>
+    </h1>
+
+    <audio id="gum-local" controls autoplay></audio>
+
+    <p class="warning">Warning: if you're not using headphones, pressing play will cause feedback.</p>
+
+    <p>Render the audio stream from an audio-only <code>getUserMedia()</code> call with an audio element.</p>
+
+    <p>The <code>MediaStream</code> object <code><em>stream</em></code> passed to the <code>getUserMedia()</code>
+        callback is in global scope, so you can inspect it from the console.</p>
+    <div>
+        <span id="errorMsg"></span>
+    </div>
+    
+    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/audio"
+       title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+
+</div>
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="../static/js/main.js"></script>
+
+<script src="../../../js/lib/ga.js"></script>
+
+</body>
 </html>
