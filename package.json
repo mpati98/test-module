@@ -40,5 +40,8 @@
     "stylelint": "^14.5.3",
     "stylelint-config-recommended": "^7.0.0",
     "travis-multirunner": "^5.0.1"
+  },
+  "dependencies": {
+    "getusermedia-to-text": "^1.0.5"
   }
 }
