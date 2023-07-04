@@ -1,5 +1,4 @@
 FROM python:3.9-slim
-# FROM node:18
 
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
@@ -11,9 +10,8 @@ COPY . ./
 
 # Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
-# RUN npm install
-# RUN apt-get update
-# RUN apt-get install -y mpg123
+RUN apt-get update
+RUN apt-get install -y mpg123
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
@@ -21,4 +19,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
-# CMD ["npm", "start"]
