@@ -249,9 +249,9 @@
             content = chatmessage.textField;
             console.log(content)
             let msg1 = {name: "User", message: content}
-            this.messages.push(msg1);
+            this.message.push(msg1);
             this.updateChatText(chatbox)
-            // 'http://127.0.0.1:5000/voice_predict
+            // fetch('http://127.0.0.1:5000/response',{
             fetch("https://test-module-leqdt7akva-as.a.run.app/response", {
                 method: 'POST',
                 body: JSON.stringify({message: content}),
@@ -269,7 +269,7 @@
                 var audio_token = r.audio_token;
                 let audio = new Audio("https://firebasestorage.googleapis.com/v0/b/arti-web-daae5.appspot.com/o/"+ audio_tag + ".mp3?alt=media&token=" + audio_token);
                 audio.play();
-                this.messages.push(msg3);
+                this.message  .push(msg3);
                 this.updateChatText(chatbox)
             }).catch((error) => {
                 // console.error('Error: ', error);
