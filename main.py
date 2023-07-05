@@ -183,6 +183,9 @@ class Chatbot(Resource):
                 resp, tag = chat_rulebased_01(text_input)
             elif "công tác xã hội" in text_input.lower():
                 resp, tag = chat_rulebased_02(text_input)
+            elif "không nghe rõ" == text_input:
+                resp = ["Tín hiệu không ổn định, vui lòng lặp lại rõ hơn nhé", "fbad6e35-3933-4388-be7b-d6dda276e114"]
+                tag = "Error"
             else:
                 text_input = transText(text_input)
                 try:
