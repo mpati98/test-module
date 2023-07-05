@@ -77,14 +77,18 @@ def getResponse(ints, intents_json):
     return result, tag
 
 def chatbot_response(msg):
-    ints = predict_class(msg, model)
-    print(ints)
-    if ints:
-        res, tag = getResponse(ints, intents)
+    if msg == 'không nghe rõ':
+        res = ["Tín hiệu không ổn định, vui lòng lặp lại rõ hơn nhé", "fbad6e35-3933-4388-be7b-d6dda276e114"]
+        tag = "Error"
     else:
-        res = ["Rất xin lỗi vì thông tin bạn cần không tồn tại trong hệ thống, chúng tôi sẽ kiểm tra và cập nhật trong thời gian tới. Bạn còn muốn biết thêm thông tin gì khác không?", "930e5fa5-827a-454f-bcac-84e1b9dd5b4f"]
-        tag = "Other"
+        ints = predict_class(msg, model)
+        if ints:
+            res, tag = getResponse(ints, intents)
+        else:
+            res = ["Rất xin lỗi vì thông tin bạn cần không tồn tại trong hệ thống, chúng tôi sẽ kiểm tra và cập nhật trong thời gian tới. Bạn còn muốn biết thêm thông tin gì khác không?", "930e5fa5-827a-454f-bcac-84e1b9dd5b4f"]
+            tag = "Other"
     return res, tag
+
 def chat_rulebased_01(msg):
     if "nguyên tắc hoạt động" in msg.lower() or "tôn chỉ hoạt động" in msg.lower():
         res = ["Câu lạc bộ hoạt động theo tôn chỉ: 1. Thượng tôn pháp luật. 2. Tôn trọng ý kiến tập thể. 3. Trung thực & minh bạch rõ ràng. 4. Hiệu quả & kịp thời. 5. Hợp tác & vươn xa. 6. Thân thiện & bác ái.", "4c265861-cbd7-4863-8300-e0237c41e5b0"]
