@@ -79,39 +79,25 @@
       <div class="owl-carousel owl-theme">
         <div class="slide slide-1">
           <div class="slide-content">
-            <h1>Chương trình Caravan Mekong Connect & Grow</h1>
+            <h1>BNI RIVERSIDE: KHỞI CÔNG NÂNG CẤP VÀ SỬA CHỮA TRƯỜNG MẦM NON TÂN NHƠN</h1>
             <p>
-              Đây là chương trình ngoài những trải nghiệm với hành trình trải
-              dài từ Việt Nam sang lĩnh thổ nước bạn Cambodia, đó còn là một
-              chuyến đi mang lại cho chúng ta nhiều cảm xúc, bởi Cambodia là một
-              quốc gia huyền bí, miền đất thiêng mang lại cho chúng ta rất nhiều
-              sự thiện lành, cảm xúc tích cực khi đến và khi trở về. Cambodia
-              gợi cho chúng ta về những câu chuyện với những giai thoại cổ đại,
-              bên cạnh đó là cảm giác của sự mộc mạc, chân phương và thiên nhiên
-              an bình.
+              Khởi công nâng cấp và sửa chữa trường mầm non Tân Nhơn tại xã Tân Thới, huyện Phong Điền, Cần Thơ đã diễn ra thành công vào ngày 3/7/2023. Buổi lễ này đã thu hút sự tham gia của nhiều đại biểu quan trọng, đặc biệt là đại diện từ BNI Riverside – nhà tài trợ chính cho dự án. Với tên công trình “Nâng cấp sửa chữa trường mầm non Tân Nhơn” dự án này đã nhận đầu tư 350.000.000 đồng từ BNI Riverside, một Chapter tại tỉnh Cần Thơ thuộc cộng đồng BNI. Đại diện của BNI Riverside đã tham gia buổi lễ khởi công, gửi lời chúc mừng và cam kết hỗ trợ tận tâm để đảm bảo dự án thành công và mang lại những điều tốt đẹp cho cộng đồng.
             </p>
           </div>
         </div>
         <div class="slide slide-2">
           <div class="slide-content">
-            <h1>Họp mặt đầu xuân</h1>
+            <h1>BNI HQH: GẮN KẾT SỨC MẠNH – HỘI TỤ THÀNH CÔNG</h1>
             <p>
-              Mọi người gặp gỡ nhau, cụng-ly với nhau và trao cho nhau những
-              năng lượng tích cực. Bên cạnh đó, phía Ban điều hành cũng không
-              quên chia sẻ những kế hoạch và chương trình hành động về công tác
-              xã hội - thiện nguyện trong năm, qua đó lắng nghe những ý kiến,
-              nguyện vọng và sự đồng hành của các thành viên.
+              Trong hai ngày 1 và 2/7, cộng đồng doanh nghiệp BNI HQH (Hải Phòng – Quảng Ninh – Hải Dương) đã tổ chức chương trình thể thao và kết nối kinh doanh với chủ đề Gắn kết sức mạnh – Hội tụ thành công tại TP Hạ Long.
             </p>
           </div>
         </div>
         <div class="slide slide-3">
           <div class="slide-content">
-            <h1>Lễ trao quà</h1>
+            <h1>NGÀY HỘI SPORTS DAY 2023: GẮN KẾT CÁC THÀNH VIÊN VÙNG BNI HQH THÔNG QUA HOẠT ĐỘNG THỂ THAO, BUSINESS MATCHING VÀ ĐÀO TẠO</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum,
-              libero minus. Cumque nobis deserunt ducimus. Dolorem dicta
-              necessitatibus beatae harum sunt cum optio reiciendis veritatis
-              eveniet soluta. Doloribus, natus accusamus?
+              Ngày hội Sports Day 2023 là chuỗi sự kiện thường niên, ngày 01,02/07/2023 vừa qua được tổ chức tại Hạ Long nhằm tăng cường sự gắn kết và tạo dựng mối quan hệ chặt chẽ giữa các Thành viên của Vùng BNI HQH (Hải Phòng, Quảng Ninh, Hải Dương).
             </p>
           </div>
         </div>
@@ -153,8 +139,8 @@
           this.state = !this.state;
           if (this.state) {
             chatbox.classList.add("chatbox--active");
-            // fetch("http://127.0.0.1:5000/welcome", {
-              fetch("https://test-module-leqdt7akva-as.a.run.app/welcome", {
+            fetch("http://127.0.0.1:5000/welcome", {
+              // fetch("https://test-module-leqdt7akva-as.a.run.app/welcome", {
               method: "POST",
               body: JSON.stringify(),
               mode: "cors",
@@ -170,7 +156,7 @@
                 let audio = new Audio(
                   "https://firebasestorage.googleapis.com/v0/b/arti-web-daae5.appspot.com/o/" +
                     audio_tag +
-                    ".mp3?alt=media&token=7b75eca7-1adf-4578-ab2b-d0e47766744a"
+                    ".mp3?alt=media&token=5b140a75-f7f1-4468-a138-29ef98f6ef97"
                 );
                 audio.play();
                 this.message.push(msg);
@@ -193,8 +179,8 @@
           }
           let msg1 = { name: "User", message: text1 };
           this.message.push(msg1);
-          // fetch("http://127.0.0.1:5000/response", {
-            fetch("https://test-module-leqdt7akva-as.a.run.app/response", {
+          fetch("http://127.0.0.1:5000/response", {
+            // fetch("https://test-module-leqdt7akva-as.a.run.app/response", {
             method: "POST",
             body: JSON.stringify({ message: text1 }),
             mode: "cors",
@@ -263,8 +249,8 @@
             }
             this.message.push(msg1);
             this.updateChatText(chatbox);
-            // fetch("http://127.0.0.1:5000/response", {
-              fetch("https://test-module-leqdt7akva-as.a.run.app/response", {
+            fetch("http://127.0.0.1:5000/response", {
+              // fetch("https://test-module-leqdt7akva-as.a.run.app/response", {
               method: "POST",
               body: JSON.stringify({ message: content }),
               mode: "cors",
