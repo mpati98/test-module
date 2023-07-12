@@ -15,7 +15,7 @@ words=[]
 classes = []
 documents = []
 ignore_words = ['?', '!']
-data_file = open('data/intents/intents_July_10_2023.json').read()
+data_file = open('data/intents/intents_May_22_2023.json').read()
 intents = json.loads(data_file)
 for intent in intents['intents']:
     for pattern in intent['patterns']:
@@ -38,8 +38,8 @@ print (len(documents), "documents")
 print (len(classes), "classes", classes)
 # words = all words, vocabulary
 print (len(words), "unique lemmatized words", words)
-pickle.dump(words,open('data/model/textsJuly10.pkl','wb'))
-pickle.dump(classes,open('data/model/labelsJuly10.pkl','wb'))
+pickle.dump(words,open('data/model/textsJun12.pkl','wb'))
+pickle.dump(classes,open('data/model/labelsJun12.pkl','wb'))
 # create our training data
 training = []
 # create an empty array for our output
@@ -81,5 +81,5 @@ sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 #fitting and saving the model 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
-model.save('data/model/model_July10.h5', hist)
+model.save('data/model/model_Jun12.h5', hist)
 print("model created")
